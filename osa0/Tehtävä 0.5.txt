@@ -1,0 +1,27 @@
+kayttaja->selain:
+note left of selain
+Käyttäjä menee single page app sivulle
+end note
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/spa
+palvelin->selain: status 200, Sivun HTML-pohja
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/main.css
+palvelin->selain: status 200, Sivun tyylitiedosto
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/spa.js
+palvelin->selain: status 200, Sivun javascript ohjelma
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/data.json
+palvelin->selain: status 200, Kaikki palvelimelle tallennetut muistiinppanot
+
+note left of selain
+  Muodostetaan muistiinpanot main.js avulla listaksi
+  HTML-sivulle "notes" elementin sisälle
+end note
+
+note left of selain
+ Selain näyttää käyttäjälle HTML-sivun, joka koostuu
+ saadusta HTML-pohjasta(/notes) ja siihen javascriptillä
+ generoidusta listasta("notes" elementin sisällä)
+end note

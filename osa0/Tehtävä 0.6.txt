@@ -1,0 +1,11 @@
+kayttaja->selain:
+note left of selain
+Käyttäjä lisää muistiinpanon
+end note
+
+selain->palvelin: POST fullstack-exampleapp.herokuapp.com/new_note_spa
+palvelin->selain: status 201, Muistiinpano luotu
+
+note left of selain
+  spa.js lisää muistiinpanon näkyvälle HTML-sivulle
+end note
