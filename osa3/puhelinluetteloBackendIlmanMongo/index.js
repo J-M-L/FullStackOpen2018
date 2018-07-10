@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const cors = require('cors')
 
 let persons = [
     {
@@ -26,15 +27,15 @@ let persons = [
     }    
 ]
 
+app.use(cors())
 app.use(bodyParser.json())
+app.use(express.static('build'))
 
 //Morgan conf
 morgan.token('data', function(req, res){
-    console.log(req.body)
     return JSON.stringify(req.body)
 })
 app.use(morgan(':method :url :data :status :res[content-length] - :response-time ms'))
-
 
 
 app.get('/api/persons/', (req, res) => {
@@ -61,7 +62,6 @@ app.delete('/api/persons/:id', (req, res) => {
 
 app.post('/api/persons/', (req,res) => {
     const body = req.body
-    
     if(!body.name){
         return res.status(400).json({error: 'name is missing'})        
     }
