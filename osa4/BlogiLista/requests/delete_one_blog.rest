@@ -1,6 +1,7 @@
 ### Get all blogs
 GET http://localhost:3001/api/blogs
 
+
 ###Post new blog to db
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
@@ -11,3 +12,6 @@ Content-Type: application/json
     "url": "http://www.google.fi",
     "likes": 50
 }
+
+###delete created blog
+DELETE http://localhost:3001/api/blogs/5b4725fb9067542140a4ff66
