@@ -1,6 +1,16 @@
-POST http://localhost:3001/api/notes 
+GET http://localhost:3001/api/users
+
+###
+GET http://localhost:3001/api/notes
+
+###
+
+POST http://localhost:3001/api/notes
 content-type: application/json
 
 {
-  "content": "VS Coden REST client on paras keksintö sitten viipaloidun leivän"
+  "content": "testikakku",
+  "important": true,
+  "userId": "5b4e475de559101f040b2515"
+  }
 }

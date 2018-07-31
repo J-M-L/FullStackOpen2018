@@ -1,0 +1,14 @@
+### Get all blogs
+GET http://localhost:3001/api/blogs
+
+###Post new blog to db
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+    "title": "Postilla luotu blogi2",
+    "author": "JokuHermanni",
+    "url": "http://www.google.fi",
+    "likes": 50,
+    "userId": "5b5869cd7c3fd90c340f6327"
+}

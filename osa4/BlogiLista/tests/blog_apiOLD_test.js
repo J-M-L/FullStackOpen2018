@@ -113,13 +113,15 @@ describe('Post method', () => {
         const response = await api.get('/api/blogs')
 
         response.body.map(b => expect(Number.isInteger(b.likes)).toBe(true))
-    })    
+    })  
+    
+    afterAll(() => {
+      server.close()
+  })
 })
 
 
-afterAll(() => {
-    server.close()
-})
+
 
 const initialBlogs = [
   {
