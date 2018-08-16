@@ -64,6 +64,69 @@ class App extends React.Component {
     window.localStorage.removeItem('loggedBlogappUser')
   }
 
+  handleLikeButton = (event) => {
+    event.preventDefault()
+
+    const blogInfo = this.state.blogs.find(b => b.title === event.target.id)
+    
+    const userID = blogInfo.user ? blogInfo.user._id : ''
+
+    const newObject = {
+      id: blogInfo.id,
+      user: userID,
+      title: blogInfo.title,
+      author: blogInfo.author,
+      url: blogInfo.url,
+      likes: blogInfo.likes + 1
+    }
+
+    blogService
+      .update(newObject)
+      .then(updatedBlog => {
+        console.log(`Blogi ${updatedBlog.title} päivitetty onnistuneesti`)
+        this.setState({
+          notification: `Blogi ${updatedBlog.title} päivitetty onnistuneesti`,
+          blogs: this.state.blogs.map(b => b.title !== updatedBlog.title ? b : updatedBlog)
+        })
+      })
+      .catch(exception => {
+        console.log('Blogi päivitys epäonnistui:')
+        console.log(exception)
+        this.setState({
+          notification: `Blogi päivitys epäonnistui:`
+        })        
+      })
+      setTimeout(() => {
+        this.setState({notification: null})
+      }, 5000)
+  }
+
+  handleDelete = (event) => {
+    event.preventDefault()
+    const blogInfo = this.state.blogs.find(b => b.title === event.target.id)
+
+    let result = window.confirm(`delete '${blogInfo.title} by ${blogInfo.author}?`);
+
+    if(result){
+      blogService
+        .deleteBlog(blogInfo.id)
+        .then(response => {
+          this.setState({blogs: this.state.blogs.filter(b => b.title !== blogInfo.title)})
+          this.setState({
+            notification: `Blogin '${blogInfo.title}' poistaminen onnistui`
+          })
+        })
+        .catch(exception => {
+          this.setState({
+            notification: `Blogin poistaminen epäonnistui:`
+          })
+        })
+        setTimeout(() => {
+          this.setState({notification: null})
+        }, 5000)
+    }
+  }
+
   addBlog = (event) => {
     event.preventDefault()
     
@@ -104,17 +167,14 @@ class App extends React.Component {
 
   render() {
     const loginForm = () => (
-      <Togglable buttonLabel="login">
-        <LoginForm
-          username={this.state.username}
-          password={this.state.password}
-          handleChange={this.handleFieldChange}
-          handleSubmit={this.login}
-        />
-      </Togglable>
+      <LoginForm
+        username={this.state.username}
+        password={this.state.password}
+        handleChange={this.handleFieldChange}
+        handleSubmit={this.login}
+      />
     )
     
-
     const blogForm = () => (
       <BlogForm 
         username={this.state.username}
@@ -125,6 +185,9 @@ class App extends React.Component {
         url={this.state.url}
         handleCreate={this.addBlog}
         blogs={this.state.blogs}
+        handleLike={this.handleLikeButton}
+        handleDelete={this.handleDelete}
+        loggedUser={this.state.user.username}
       />
     )
 
@@ -132,10 +195,12 @@ class App extends React.Component {
       <div>        
         <Notification message={this.state.notification} />
 
-        {this.state.user === null ?
-          loginForm() :
-          blogForm()
-        }
+        <Togglable buttonLabel ='login'>
+          {this.state.user === null ?
+            loginForm() :
+            blogForm()
+          }
+        </Togglable>
 
       </div>
     )  

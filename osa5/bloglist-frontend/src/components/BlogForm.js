@@ -3,7 +3,20 @@ import Blog from './Blog'
 import Button from './Button'
 import NewBlogField from './NewBlogField'
 
-const BlogForm = ({username, handleLogout, handleChange, title, author, url, handleCreate, blogs}) => {
+const blogCompare = (a, b) => {
+  if(a.likes < b.likes){
+    return 1
+  }
+  if(a.likes > b.likes){
+    return -1
+  }
+  return 0  
+}
+
+
+const BlogForm = ({username, handleLogout, handleChange, title, author, url, handleCreate, blogs, handleLike, handleDelete, loggedUser}) => {
+  const sortedBlogs = blogs.sort(blogCompare)
+
     return(
       <div>
         <h2>blogs</h2>
@@ -26,8 +39,9 @@ const BlogForm = ({username, handleLogout, handleChange, title, author, url, han
                       
                       createClick = {handleCreate}
         />
-        {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
+
+        {sortedBlogs.map(blog =>
+          <Blog key={blog.id} blog={blog} handleLike={handleLike} handleDelete={handleDelete} username={loggedUser} />
         )}
         
       </div>
