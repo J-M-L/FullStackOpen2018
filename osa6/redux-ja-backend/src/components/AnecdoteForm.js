@@ -1,6 +1,6 @@
 import React from 'react'
 import { anecdoteCreation } from '../reducers/anecdoteReducer'
-import { newNotification, removeNotification } from '../reducers/notificationReducer'
+import { notify } from '../reducers/notificationReducer'
 import { connect } from 'react-redux'
 
 
@@ -11,11 +11,7 @@ class AnecdoteForm extends React.Component {
     e.target.anecdote.value = ''
     const notification = `you added a new anecdote '${content}'`
     this.props.anecdoteCreation(content)
-    this.props.newNotification(notification)
-    setTimeout(() => {
-      this.props.removeNotification()
-    }, 5000)
-
+    this.props.notify(notification, 1)
   }
   render() {
     return (
@@ -32,8 +28,7 @@ class AnecdoteForm extends React.Component {
 
 const mapDispatchToProps = {
   anecdoteCreation,
-  newNotification,
-  removeNotification
+  notify
 }
 
 const ConnectedAnecdoteForm = connect(null, mapDispatchToProps)(AnecdoteForm)
