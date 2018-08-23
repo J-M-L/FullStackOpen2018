@@ -1,79 +1,69 @@
 import React from 'react'
-import { BrowserRouter as Router,  Route, Link } from 'react-router-dom'
-import { Container, Table, Form, Button, Message, Menu, Card, Grid } from 'semantic-ui-react'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { Table, FormGroup, FormControl, ControlLabel, Button, Alert, Navbar, Nav, NavItem } from 'react-bootstrap'
+import { LinkContainer } from "react-router-bootstrap"
 
-/* Stylet olivat käytössä,  
-const menuStyle = {
-  background: 'lightblue'
-}
 
-const navLinkStyle ={
-  color: 'black',
-  textDecoration: 'none'
-  
-}
+/* ERI Versio jossa on tehty UI Bootstrapillä */
 
-const notificationStyle = {
-  borderStyle: 'solid',
-  marginTop: 'auto',
-  padding: '10px',
-  borderColor: 'green',
-  borderRadius: '25px'
 
-}
-*/
-const MenuBar = () => (
-  <Menu inverted>
-    <Menu.Item link>
-      <Link to="/">anocdotes</Link>
-    </Menu.Item>
-    <Menu.Item link>
-      <Link to="/create">create new</Link>
-    </Menu.Item>
-    <Menu.Item link>
-      <Link to="/about">about</Link>
-    </Menu.Item>
-  </Menu>
+
+
+const Menu = () => (
+    <Navbar inverse collapseOnSelect>
+      <Navbar.Header>
+        <Navbar.Brand>
+          Anecdote ohjelma
+        </Navbar.Brand>
+        <Navbar.Toggle />
+      </Navbar.Header>
+      <Navbar.Collapse>
+        <Nav>
+          <LinkContainer exact to="/">
+            <NavItem>anecdotes</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/create">
+            <NavItem>create new</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/about">
+            <NavItem>about</NavItem>
+          </LinkContainer>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
 )
 
 const AnecdoteList = ({ anecdotes }) => (
   <div>
     <h2>Anecdotes</h2>
     <Table striped>
-      <Table.Body>
+      <tbody>
         {anecdotes.map(anecdote => 
-          <Table.Row key={anecdote.id}>
-            <Table.Cell>
+          <tr key={anecdote.id}>
+            <td>
               <Link to={`/anecdotes/${anecdote.id}`}>{anecdote.content}</Link>
-            </Table.Cell>
-            <Table.Cell>
+            </td>
+            <td>
               {anecdote.author}
-            </Table.Cell>
-          </Table.Row>
+            </td>
+          </tr>
         )}
-      </Table.Body>
+      </tbody>
     </Table>
   </div>
 )
 
 const About = () => (
   <div>
-    <Grid columns='equal'>
-      <Grid.Column>
-        <h2>About anecdote app</h2>
-        <p>According to Wikipedia:</p>
-        
-        <em>An anecdote is a brief, revealing account of an individual person or an incident. 
-          Occasionally humorous, anecdotes differ from jokes because their primary purpose is not simply to provoke laughter but to reveal a truth more general than the brief tale itself, 
-          such as to characterize a person by delineating a specific quirk or trait, to communicate an abstract idea about a person, place, or thing through the concrete details of a short narrative. 
-          An anecdote is "a story with a point."</em>
+    <h2>About anecdote app</h2>
+    <p>According to Wikipedia:</p>
+    
+    <em>An anecdote is a brief, revealing account of an individual person or an incident. 
+      Occasionally humorous, anecdotes differ from jokes because their primary purpose is not simply to provoke laughter but to reveal a truth more general than the brief tale itself, 
+      such as to characterize a person by delineating a specific quirk or trait, to communicate an abstract idea about a person, place, or thing through the concrete details of a short narrative. 
+      An anecdote is "a story with a point."</em>
 
-        <p>Software engineering is full of excellent anecdotes, at this app you can find the best and add more.</p>
-      </Grid.Column>
-      <Grid.Column>
-        <Card image="https://avatars1.githubusercontent.com/u/523235?s=400&v=4"></Card>
-      </Grid.Column>
-    </Grid>
+    <p>Software engineering is full of excellent anecdotes, at this app you can find the best and add more.</p>
   </div>
 )
 
@@ -115,32 +105,20 @@ class CreateNew extends React.Component {
     return(
       <div>
         <h2>create a new anecdote</h2>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Field>
-            <label>content</label>
-            <input 
-              name='content'
-              value={this.state.content} 
-              onChange={this.handleChange}/>
-          </Form.Field>
-          
-          <Form.Field>
-            <label>author</label>
-            <input 
-              name='author'
-              value={this.state.author} 
-              onChange={this.handleChange}/>
-          </Form.Field>
-          
-          <Form.Field>
-            <label>url for more info</label>
-            <input 
-              name='info'
-              value={this.state.info} 
-              onChange={this.handleChange}/>
-          </Form.Field>
-          <Button type='submit'>create</Button>
-        </Form>
+        <form onSubmit={this.handleSubmit}>
+          <FormGroup>
+            <ControlLabel>content</ControlLabel>
+            <FormControl type="text" name="content" value={this.state.content} onChange={this.handleChange} />
+
+            <ControlLabel>author</ControlLabel>
+            <FormControl type="text" name="author" value={this.state.author} onChange={this.handleChange} />
+
+            <ControlLabel>url for more info</ControlLabel>
+            <FormControl type="text" name="info" value={this.state.info} onChange={this.handleChange} />
+
+            <Button bsStyle="success" type="submit">create</Button>
+          </FormGroup>
+        </form>
       </div>  
     )
 
@@ -213,13 +191,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <Container>
+      <div className="container">
         <Router>
           <div>
             <h1>Software anecdotes</h1>
-              <MenuBar />
+              <Menu />
 
-              {(this.state.notification && <Message success>{this.state.notification}</Message>)}
+              {(this.state.notification && <Alert color="success">{this.state.notification}</Alert>)}
 
               <Route exact path="/" render={() => <AnecdoteList anecdotes={this.state.anecdotes}/>} />
               <Route exact path="/anecdotes" render={() => <AnecdoteList anecdotes={this.state.anecdotes}/>} />
@@ -231,7 +209,7 @@ class App extends React.Component {
               <Footer />
             </div>
         </Router>
-      </Container>
+      </div>
     );
   }
 }
