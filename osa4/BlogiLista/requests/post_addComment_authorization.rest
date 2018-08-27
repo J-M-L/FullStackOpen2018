@@ -1,0 +1,23 @@
+### Get all blogs
+GET http://localhost:3001/api/blogs
+
+### Get all users
+GET http://localhost:3001/api/users
+
+### try to login
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+    "username": "username",
+    "password": "user"
+}
+
+###Post new blog to db
+POST http://localhost:3001/api/blogs/5b7ff30a4361992e3cfdae58/comments
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWQiOiI1YjY1ODRlMTIxZDY3MTJhNTBlYThkYjEiLCJpYXQiOjE1MzUzNjE4NjR9.2ac92WYjtgmj9Ky7RYmtoT9qB4YY9aGO-sQ9iiQOLek
+
+{
+    "comment": "Aika hyvä kommentti"
+}

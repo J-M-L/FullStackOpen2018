@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react'
 import { changeFilter } from '../reducers/filterReducer'
 import { connect } from 'react-redux'
