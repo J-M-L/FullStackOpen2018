@@ -5,7 +5,7 @@ let token = null
 
 const getConfig = () => {
   return{
-    headers: { 'Authorization' : token}
+    headers: { 'Authorization' : token }
   }
 }
 
@@ -55,11 +55,11 @@ const deleteBlog = async (id) => {
   const config = getConfig()
 
   const delUrl = baseUrl + '/' + id
-  
+
   const response = await axios.delete(delUrl, config)
 
   return response
 }
 
 
-export default { getAll, setToken, create, update, deleteBlog, addComment}
+export default { getAll, setToken, create, update, deleteBlog, addComment }

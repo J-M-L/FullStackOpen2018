@@ -12,18 +12,18 @@ const blogListStyle = {
 }
 
 const BlogForm = (props) => {
-    return(
-      <div>
-        <NewBlogField />
+  return(
+    <div>
+      <NewBlogField />
 
-        {props.blogInfo.blogs.map(blog =>
-          <div key={blog.id} style={blogListStyle}>
-            <Link to={`/blogs/${blog.id}`}>{blog.title} {blog.author}</Link> 
-          </div>
-        )}
-        
-      </div>
-    )
+      {props.blogInfo.blogs.map(blog =>
+        <div key={blog.id} style={blogListStyle}>
+          <Link to={`/blogs/${blog.id}`}>{blog.title} {blog.author}</Link>
+        </div>
+      )}
+
+    </div>
+  )
 }
 
 const mapStateToProps = (state) => {
@@ -34,7 +34,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatcerToProps = {
-  
+
 }
 
 const ConnectedBlogForm = connect(

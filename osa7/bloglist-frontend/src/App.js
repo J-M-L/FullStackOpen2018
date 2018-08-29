@@ -16,7 +16,7 @@ import { blogInitialization, voteBlog, removeBlog, addNewComment } from './reduc
 import { userInitialization } from './reducers/userReducer'
 
 import { BrowserRouter as Router,  Route, Link } from 'react-router-dom'
-import { Container, Table, Form, Button, Message, Menu, Card, Grid, Tab, List } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 
 
 class App extends React.Component {
@@ -28,27 +28,27 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.props.blogInitialization()  
-    this.props.userInitialization()  
-    
+    this.props.blogInitialization()
+    this.props.userInitialization()
+
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
     if(loggedUserJSON){
       const user = JSON.parse(loggedUserJSON)
       this.props.changeUser(user)
       blogService.setToken(user.token)
     }
-  } 
+  }
 
-  userById = (id) => 
+  userById = (id) =>
     this.props.userInfo.users.find(a => a.id === id)
 
-  blogById = (id) =>     
+  blogById = (id) =>
     this.props.blogInfo.blogs.find(b => b.id === id)
-  
+
 
   render() {
     return(
-      <Container>        
+      <Container>
         <Router>
           <div>
             <Notification />
@@ -56,13 +56,13 @@ class App extends React.Component {
             <MenuBar userInfo={this.props.userInfo} logoutHandler={this.props.changeUser} />
             <LoginForm />
             <WrappedLink text="create new" destination="/"/>
-            {this.props.userInfo.user !== null ?              
+            {this.props.userInfo.user !== null ?
               <div>
-                <Route exact path="/" render={() =><BlogForm  />}/>
-                <Route exact path="/users" render={() =><UserList usersList={this.props.userInfo.users}  />}/>
-                <Route exact path="/users/:id" render={({match}) =>
+                <Route exact path="/" render={() => <BlogForm  />}/>
+                <Route exact path="/users" render={() => <UserList usersList={this.props.userInfo.users}  />}/>
+                <Route exact path="/users/:id" render={({ match }) =>
                   <SingleUserList user={this.userById(match.params.id)}  />}/>
-                <Route exact path="/blogs/:id" render={(({match, history}) => 
+                <Route exact path="/blogs/:id" render={(({ match, history }) =>
                   <SingleBlogView blog={this.blogById(match.params.id)} props={this.props} history={history}/>)} />
               </div>
               : <div></div>
@@ -70,14 +70,14 @@ class App extends React.Component {
           </div>
         </Router>
       </Container>
-    )  
-  }  
+    )
+  }
 }
 
 const WrappedLink = ({ text, destination }) => {
   return(
     <button>
-      <Link style={{display:'block'}} to={destination}>{text}</Link> 
+      <Link style={{ display:'block' }} to={destination}>{text}</Link>
     </button>
   )
 }
@@ -104,4 +104,4 @@ const ConnectedApp = connect(
   mapDispatchToProps
 )(App)
 
-export default ConnectedApp;
+export default ConnectedApp

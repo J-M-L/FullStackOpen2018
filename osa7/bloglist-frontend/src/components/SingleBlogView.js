@@ -1,9 +1,9 @@
 import React from 'react'
 import CommentsView from './CommentsView'
 
-const SingleBlogView = ({blog, props, history}) => {
+const SingleBlogView = ({ blog, props, history }) => {
   if(blog){
-    return(
+    return (
       <div>
         <h2>{blog.title}</h2>
         <div>
@@ -15,14 +15,14 @@ const SingleBlogView = ({blog, props, history}) => {
         <div>
           <a>added by {blog.user ? blog.user.name : 'unknown'}</a>
         </div>
-        {deleteButtonEnable(blog, props) 
-        ? <button id={blog.title} onClick={e => handleDelete(e, props, history) }>delete</button>
-        : <div></div>
+        {deleteButtonEnable(blog, props)
+          ? <button id={blog.title} onClick={e => handleDelete(e, props, history) }>delete</button>
+          : <div></div>
         }
         <CommentsView blog={blog} props={props} />
       </div>
     )
-  }  
+  }
   return(
     <div></div>
   )
@@ -31,8 +31,8 @@ const SingleBlogView = ({blog, props, history}) => {
 const deleteButtonEnable = (blog, props) => {
   if(blog.user){
     const blogUser = blog.user.username
-    const loggedUser = props.userInfo.user.username  
-  
+    const loggedUser = props.userInfo.user.username
+
     return blogUser === loggedUser ? true : false
   }
   return true
@@ -41,7 +41,7 @@ const deleteButtonEnable = (blog, props) => {
 const handleDelete = (event, props, history) => {
   event.preventDefault()
   const blog = props.blogInfo.blogs.find(b => b.title === event.target.id)
-  props.removeBlog(blog)  
+  props.removeBlog(blog)
   props.notify(`Blogin '${blog.title}' poistaminen onnistui`)
   history.push('/')
 }
@@ -51,7 +51,7 @@ const handleLike = (event, props) => {
 
   const blog = props.blogInfo.blogs.find(b => b.title === event.target.id)
   props.voteBlog(blog, props.userInfo)
-  props.notify(`Blogi ${blog.title} päivitetty onnistuneesti`) 
+  props.notify(`Blogi ${blog.title} päivitetty onnistuneesti`)
 }
 
 export default SingleBlogView

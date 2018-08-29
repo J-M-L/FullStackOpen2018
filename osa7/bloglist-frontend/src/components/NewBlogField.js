@@ -16,31 +16,31 @@ const createBlog = (event, props) => {
     url: event.target.url.value
   }
   props.addBlog(newBlog, props.userInfo)
-  props.notify(`a new blog '${newBlog.title}' by ${newBlog.author} added`)   
+  props.notify(`a new blog '${newBlog.title}' by ${newBlog.author} added`)
 }
 
 const NewBlogField = (props) => {
-    return(
-      <div>
-        <h1>Create New</h1>
-        <form onSubmit = {e => createBlog(e, props)}>
-          <ImputField name = 'title'
-                      type = 'text'
-                      onChange = {e=> handleChange(e, props.changeTitle)}
-          />
-          <ImputField name = 'author'
-                      type = 'text'
-                      onChange = {e=> handleChange(e, props.changeAuthor)}
-          />
-          <ImputField name = 'url'
-                      type = 'text'
-                      onChange = {e=> handleChange(e, props.changeUrl)}
-          />
-          <button type="submit">create</button>   
-        </form>     
-        <br/>
-      </div>
-    )
+  return(
+    <div>
+      <h1>Create New</h1>
+      <form onSubmit = {e => createBlog(e, props)}>
+        <ImputField name = 'title'
+          type = 'text'
+          onChange = {e => handleChange(e, props.changeTitle)}
+        />
+        <ImputField name = 'author'
+          type = 'text'
+          onChange = {e => handleChange(e, props.changeAuthor)}
+        />
+        <ImputField name = 'url'
+          type = 'text'
+          onChange = {e => handleChange(e, props.changeUrl)}
+        />
+        <button type="submit">create</button>
+      </form>
+      <br/>
+    </div>
+  )
 }
 
 const mapStateToProps = (state) => {

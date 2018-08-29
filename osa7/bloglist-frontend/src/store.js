@@ -7,14 +7,14 @@ import blogReducer from './reducers/blogReducer'
 
 
 const reducers = combineReducers({
-    notification: notificationReducer,
-    user: userReducer,
-    blogInfo: blogReducer
+  notification: notificationReducer,
+  user: userReducer,
+  blogInfo: blogReducer
 })
 
 const store = createStore(
-    reducers,
-    applyMiddleware(thunk)
+  reducers,
+  applyMiddleware(thunk)
 )
 
 export default store
