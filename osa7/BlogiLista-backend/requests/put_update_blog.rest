@@ -1,0 +1,25 @@
+### Get all blogs
+GET http://localhost:3001/api/blogs
+
+
+###Post new blog to db
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+    "title": "Postilla luotu blogi put päivitystä varten",
+    "author": "alkutilanne on 0",
+    "url": "http://www.google.fi",
+    "likes": 0
+}
+
+###Put update creted blog
+PUT http://localhost:3001/api/blogs/5b472c5429604d03401a6326
+Content-Type: application/json
+
+{
+    "title": "Postilla luotu blogi put päivitystä varten",
+    "author": "alkutilanne on 0",
+    "url": "http://www.google.fi",
+    "likes": 200
+}
