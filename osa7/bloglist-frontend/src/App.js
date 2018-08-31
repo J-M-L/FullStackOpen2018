@@ -55,9 +55,9 @@ class App extends React.Component {
             <h2>blog APP</h2>
             <MenuBar userInfo={this.props.userInfo} logoutHandler={this.props.changeUser} />
             <LoginForm />
-            <WrappedLink text="create new" destination="/"/>
             {this.props.userInfo.user !== null ?
               <div>
+                <WrappedLink text="create new" destination="/"/>
                 <Route exact path="/" render={() => <BlogForm  />}/>
                 <Route exact path="/users" render={() => <UserList usersList={this.props.userInfo.users}  />}/>
                 <Route exact path="/users/:id" render={({ match }) =>
