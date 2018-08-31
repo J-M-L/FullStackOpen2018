@@ -1,8 +1,7 @@
-Zeit osoite without mongoDB
-Backend: https://osa3-njqjwctyjs.now.sh/api/persons
-Frontend: https://osa3-njqjwctyjs.now.sh
+Zeit osoite: https://osa7-lfrjhfimyx.now.sh/
 
+käyttäjänimi: username
+salasana: user
 
-zeit With mongoDB
-front: https://osa3-lzjaizfycj.now.sh
-back : https://osa3-lzjaizfycj.now.sh
+käyttäjänimi2: user2
+salasana: user
