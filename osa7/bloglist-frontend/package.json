@@ -28,6 +28,8 @@
     "enzyme-adapter-react-16": "^1.2.0",
     "eslint": "^5.4.0",
     "eslint-plugin-jest": "^21.22.0",
+    "jest-puppeteer": "^3.3.1",
+    "puppeteer": "^1.7.0",
     "style-loader": "^0.23.0",
     "webpack": "^3.11.0"
   }
